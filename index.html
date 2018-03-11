@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron text-center">
             <h1> Current Train Schedule
             </h1>
         </div>
@@ -51,28 +52,28 @@
                         </tr>
                     </tbody>
                 </table>
-
+               
 
 
             </div>
-            <div class="card container">
+            <div class="spacer"></div>
+            <div class="card container" id="enterInfo">
                 <form>
                     <div class="form-group">
-                        <label for="emName">Name</label>
-                        <input type="text" class="form-control" id="emName" aria-describedby="emailHelp" placeholder="Enter Name">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <label for="trainName">Train Name</label>
+                        <input type="text" class="form-control" id="trainName" placeholder="Enter Train Name">
                     </div>
                     <div class="form-group">
-                        <label for="startDate">Start Date</label>
-                        <input type="date" class="form-control" id="startDate" placeholder="MM/DD/YYYY">
+                        <label for="role">Destination</label>
+                        <input type="text" class="form-control form-text text-muted" id="destination" placeholder="Enter Destination">
                     </div>
                     <div class="form-group">
-                        <label for="role">Role</label>
-                        <input type="text" class="form-control form-text text-muted" id="role">
+                        <label for="firstArrival">First Arrival</label>
+                        <input type="text" class="form-control" id="arrivalTime" placeholder="Enter the Train's First Arrival Time">
                     </div>
                     <div class="form-group">
-                        <label for="monthlyRate">Monthly Rate</label>
-                        <input type="text" class="form-control form-text text-muted" id="monthlyRate">
+                        <label for="frequency">Frequency</label>
+                        <input type="text" class="form-control form-text text-muted" id="frequency" placeholder="Enter the Frequency of the Train's Arrival">
                     </div>
                     <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
 
@@ -81,6 +82,7 @@
         </div>
 
     </div>
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
     <script src="app.js"></script>
 </body>
 
