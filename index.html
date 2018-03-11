@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Time</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1> Current Train Schedule
+            </h1>
+        </div>
+
+        <div class="container">
+            <div class="card">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Train Name</th>
+
+                            <th>Destination</th>
+
+                            <th>Frequency (min)</th>
+
+                            <th>Next Arrival</th>
+
+                            <th>Minutes Away</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="trainDisplayData">
+                        <!--create new employeeData rows with jQuery -->
+                        <tr>
+                            <th>Thomas</th>
+
+                            <th>Manhattan</th>
+
+                            <th>45</th>
+
+                            <th>7pm</th>
+
+                            <th>2 minutes</th>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+            </div>
+            <div class="card container">
+                <form>
+                    <div class="form-group">
+                        <label for="emName">Name</label>
+                        <input type="text" class="form-control" id="emName" aria-describedby="emailHelp" placeholder="Enter Name">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" placeholder="MM/DD/YYYY">
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <input type="text" class="form-control form-text text-muted" id="role">
+                    </div>
+                    <div class="form-group">
+                        <label for="monthlyRate">Monthly Rate</label>
+                        <input type="text" class="form-control form-text text-muted" id="monthlyRate">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
