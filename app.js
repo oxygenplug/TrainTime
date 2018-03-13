@@ -13,15 +13,15 @@ var database = firebase.database();
 
 // 2. Button for adding Employees
 $("#submitBtn").on("click", function (event) {
-  event.preventDefault();
+    event.preventDefault();
 
   // Grabs user input
-  var trainName = $("#trainName").val().trim();
-  var dest = $("#destination").val().trim();
-  var firstArrival = $("#arrivalTime").val().trim();
-  var frequency = $("#frequency").val().trim();
-  var trimFreq1 = frequency / 10;
-  var trimFreq2 = trimFreq1 / 60;
+    var trainName = $("#trainName").val().trim();
+    var dest = $("#destination").val().trim();
+    var firstArrival = $("#arrivalTime").val().trim();
+    var frequency = $("#frequency").val().trim();
+    var trimFreq1 = frequency / 10;
+    var trimFreq2 = trimFreq1 / 60;
 
   // creates object to hold all the data
   var newTrainTime = {
@@ -54,26 +54,26 @@ $("#submitBtn").on("click", function (event) {
     var h = d.getHours();
     // sets m to the current minute
     var m = d.getMinutes();
-  
+
 
     //currently not functioning. I need to take the initial time inputed and add the frequency
     // until it surpasses the current hour 
-   /* while (slicedAt < h) {
-      slicedAt = Number(slicedAt) + Number(trimFreq2);
-    } */
-   
-  
+    /* while (slicedAt < h) {
+       slicedAt = Number(slicedAt) + Number(trimFreq2);
+     } */
+
+
   }
 
   calculateArrival();
   // displays the data inputted by the user
   $("#trainDisplayData").append("<tr>" +
-                                "<th>" + trainName + "</th>" + 
-                                "<th>" + dest + "</th>" + 
-                                "<th>" + frequency +  "</th>" + 
-                                "<th>" +  + "</th>" + 
-                                "<th>" +  + "</th>"
-                                 +"</tr>")
+    "<th>" + trainName + "</th>" +
+    "<th>" + dest + "</th>" +
+    "<th>" + frequency + "</th>" +
+    "<th>" + + "</th>" +
+    "<th>" + + "</th>"
+    + "</tr>")
 
 
 
@@ -100,5 +100,9 @@ database.ref("Trains").on("child_added", function (childSnapshot, prevChildKey) 
   console.log(dest);
   console.log(firstArrival);
   console.log(frequency);
+
+  /* I am still unsure how to pull the data back from firebase.
+  The user input captured gets sent into a randomly named object,
+  so im unsure how to properly reference that */
 
 });
