@@ -20,8 +20,10 @@ $("#submitBtn").on("click", function (event) {
   var dest = $("#destination").val().trim();
   var firstArrival = $("#arrivalTime").val().trim();
   var frequency = $("#frequency").val().trim();
+  var trimFreq1 = frequency / 10;
+  var trimFreq2 = trimFreq1 / 60;
 
-  // Creates local "temporary" object for holding employee data
+  // creates object to hold all the data
   var newTrainTime = {
     name: trainName,
     dest: dest,
@@ -29,7 +31,7 @@ $("#submitBtn").on("click", function (event) {
     frequency: frequency,
   };
 
-  // Uploads employee data to the database
+  // Uploads data to databse
   database.ref().push(newTrainTime);
 
   // Logs everything to console
@@ -42,24 +44,29 @@ $("#submitBtn").on("click", function (event) {
   alert("A New Train Schedule Has Been Added!");
 
   function calculateArrival() {
+    //sets aT to the arrival time input which is in military time format
     var aT = $("#arrivalTime").val().trim();
-    var slicedAt = aT.slice(0, 1);
+    // grabs the first two digits of the submitted time
+    var slicedAt = aT.slice(0, 2);
+    // creates a new date object
     var d = new Date;
+    // sets h to the current hr
     var h = d.getHours();
-    console.log(h);
-    var nextArrival = 0;
+    // sets m to the current minute
+    var m = d.getMinutes();
+  
 
-    do {
-      slicedAt = slicedAt  + frequency; 
-
-    }
-    while(slicedAt < h );
-
+    //currently not functioning. I need to take the initial time inputed and add the frequency
+    // until it surpasses the current hour 
+   /* while (slicedAt < h) {
+      slicedAt = Number(slicedAt) + Number(trimFreq2);
+    } */
+   
   
   }
 
   calculateArrival();
-
+  // displays the data inputted by the user
   $("#trainDisplayData").append("<tr>" +
                                 "<th>" + trainName + "</th>" + 
                                 "<th>" + dest + "</th>" + 
@@ -77,7 +84,7 @@ $("#submitBtn").on("click", function (event) {
   $("#frequency").val("");
 });
 
-
+// adds user input to train database
 database.ref("Trains").on("child_added", function (childSnapshot, prevChildKey) {
 
   console.log(childSnapshot.val());
