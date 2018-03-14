@@ -20,8 +20,6 @@ $("#submitBtn").on("click", function (event) {
     var dest = $("#destination").val().trim();
     var firstArrival = $("#arrivalTime").val().trim();
     var frequency = $("#frequency").val().trim();
-    var trimFreq1 = frequency / 10;
-    var trimFreq2 = trimFreq1 / 60;
 
   // creates object to hold all the data
   var newTrainTime = {
@@ -47,21 +45,24 @@ $("#submitBtn").on("click", function (event) {
     //sets aT to the arrival time input which is in military time format
     var aT = $("#arrivalTime").val().trim();
     // grabs the first two digits of the submitted time
-    var slicedAt = aT.slice(0, 2);
+    var slicedH = Number(aT.slice(0, 2));
+    var slicedM = Number(aT.slice(3,5));
+    var slicedaT = Number(slicedH) + ":" + Number(slicedM);
     // creates a new date object
-    var d = new Date;
-    // sets h to the current hr
-    var h = d.getHours();
-    // sets m to the current minute
-    var m = d.getMinutes();
+    console.log(slicedaT);
+    var currentH = moment().hour();
+    var currentM = moment().minutes();
+    var currentTime = Number(currentH) + ":" + Number(currentM);
+    console.log(currentTime);
 
+    var frequency = Number($("#frequency").val().trim());
+    var nextArrival;
+    while(slicedH < currentH && slicedM < currentM) {
+      nextArrival = moment().hour().minutes();
+      nextArrival.add(frequency, minutes)
+    }
 
-    //currently not functioning. I need to take the initial time inputed and add the frequency
-    // until it surpasses the current hour 
-    /* while (slicedAt < h) {
-       slicedAt = Number(slicedAt) + Number(trimFreq2);
-     } */
-
+    console.log(nextArrival);
 
   }
 
