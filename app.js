@@ -44,14 +44,15 @@ $("#submitBtn").on("click", function (event) {
   function calculateArrival() {
    // var aT = $("#arrivalTime").val().trim();
     // creates a new date object
-    var currentTime= moment().format("HH:mm a");
+    var currentTime= moment().format("HH:mm");
     console.log(currentTime);
     var timeE1 = $("#myTime").val();
     var timeE2 = moment(timeE1);
-    console.log(timeE2);
-    /*if (moment(timeE2).isAfter(currentTime)) {
-    var calculatedArrivalTime = 5
-    };*/
+    var selectedArrivalTime = timeE2._i;
+    console.log(timeE2._i);
+    if (moment(selectedArrivalTime).isAfter(currentTime)) {
+      console.log("I'm working!");
+    };
    
   }
 
