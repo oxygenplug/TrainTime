@@ -11,7 +11,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-// 2. Button for adding Employees
+// 2. Button for adding trains
 $("#submitBtn").on("click", function (event) {
     event.preventDefault();
 
