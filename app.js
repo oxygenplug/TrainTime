@@ -32,13 +32,18 @@ $("#submitBtn").on("click", function (event) {
       while (moment().isAfter(this.nextArrival)) {
         this.nextArrival.add(this.frequency, 'm')
       }
+      console.log(this.nextArrival);
       return this.nextArrival;
-      console.log(this.nextArrival)
+     
+      // not sure how to properly scope this so i can return it to a variable to use to write the info to the html
     }
 
     this.getMinutesRemaining = function () {
-      return moment(this.nextArrival).subtract(moment());
       console.log(moment(this.nextArrival).subtract(moment()));
+      return moment(this.nextArrival).subtract(moment());
+      
+      // not sure how to properly scope this so i can return it to a variable to use to write the info to the html
+      
     }
   }
 
@@ -120,7 +125,10 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey) {
   console.log(frequency);
 
 // not fully working, it reloads all childs each time. I need it to just reload them each one time
-  database.ref().on('child_added', function(childSnapshot) {
+// changing from .on to .once only populates the first object in the database but it does it for total amount of objects in the database
+// i think i can solve this if i can figure out how to do a forEach type of thing through the database, not surewhat the FireBase syntax is for that
+// .on + child_added // database.ref().once('value', function(childSnapshot, prevChildKey)
+  database.ref().on('child_added', function(childSnapshot, prevChildKey) {
    // $("#trainDisplayData").empty();
     $("#trainDisplayData").append("<tr>" +
     "<th>" + childSnapshot.val().name + "</th>" +
