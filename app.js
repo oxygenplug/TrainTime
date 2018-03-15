@@ -18,7 +18,7 @@ $("#submitBtn").on("click", function (event) {
   // Grabs user input
     var trainName = $("#trainName").val().trim();
     var dest = $("#destination").val().trim();
-    var firstArrival = $("#arrivalTime").val().trim();
+    var firstArrival = $("#myTime").val().trim();
     var frequency = $("#frequency").val().trim();
 
   // creates object to hold all the data
@@ -42,28 +42,17 @@ $("#submitBtn").on("click", function (event) {
   alert("A New Train Schedule Has Been Added!");
 
   function calculateArrival() {
-    //sets aT to the arrival time input which is in military time format
-    var aT = $("#arrivalTime").val().trim();
-    // grabs the first two digits of the submitted time
-    var slicedH = Number(aT.slice(0, 2));
-    var slicedM = Number(aT.slice(3,5));
-    var slicedaT = Number(slicedH) + ":" + Number(slicedM);
+   // var aT = $("#arrivalTime").val().trim();
     // creates a new date object
-    console.log(slicedaT);
-    var currentH = moment().hour();
-    var currentM = moment().minutes();
-    var currentTime = Number(currentH) + ":" + Number(currentM);
+    var currentTime= moment().format("HH:mm a");
     console.log(currentTime);
-
-    var frequency = Number($("#frequency").val().trim());
-    var nextArrival;
-    while(slicedH < currentH && slicedM < currentM) {
-      nextArrival = moment().hour().minutes();
-      nextArrival.add(frequency, minutes)
-    }
-
-    console.log(nextArrival);
-
+    var timeE1 = $("#myTime").val();
+    var timeE2 = moment(timeE1);
+    console.log(timeE2);
+    /*if (moment(timeE2).isAfter(currentTime)) {
+    var calculatedArrivalTime = 5
+    };*/
+   
   }
 
   calculateArrival();
@@ -81,7 +70,7 @@ $("#submitBtn").on("click", function (event) {
   // Clears all of the text-boxes
   $("#trainName").val("");
   $("#destination").val("");
-  $("#arrivalTime").val("");
+  $("#myTime").val("");
   $("#frequency").val("");
 });
 
