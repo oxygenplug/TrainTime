@@ -13,13 +13,36 @@ var database = firebase.database();
 
 // 2. Button for adding trains
 $("#submitBtn").on("click", function (event) {
-    event.preventDefault();
-
+  
+  event.preventDefault();
+  
   // Grabs user input
-    var trainName = $("#trainName").val().trim();
-    var dest = $("#destination").val().trim();
-    var firstArrival = $("#myTime").val().trim();
-    var frequency = $("#frequency").val().trim();
+  var trainName = $("#trainName").val().trim();
+  var dest = $("#destination").val().trim();
+  var firstArrival = $("#myTime").val().trim();
+  var frequency = $("#frequency").val().trim();
+
+  function TrainSchedule(name, firstArrival, dest, frequency) {
+    this.name = name;
+    this.nextArrival = moment(firstArrival);
+    this.dest = dest;
+    this.frequency = frequency;
+
+    this.getNextArrival = function () {
+      while (moment().isAfter(this.nextArrival)) {
+        this.nextArrival.add(this.frequency, 'm')
+      }
+      return this.nextArrival;
+      console.log(this.nextArrival)
+    }
+
+    this.getMinutesRemaining = function () {
+      return moment(this.nextArrival).subtract(moment());
+      console.log(moment(this.nextArrival).subtract(moment()));
+    }
+  }
+
+  TrainSchedule(trainName, firstArrival, dest, frequency);
 
   // creates object to hold all the data
   var newTrainTime = {
@@ -32,16 +55,17 @@ $("#submitBtn").on("click", function (event) {
   // Uploads data to databse
   database.ref().push(newTrainTime);
 
-  // Logs everything to console
-  console.log(newTrainTime.name);
-  console.log(newTrainTime.dest);
-  console.log(newTrainTime.arrives);
-  console.log(newTrainTime.frequency);
-
-  // Alert
   alert("A New Train Schedule Has Been Added!");
 
-  function calculateArrival() {
+
+
+
+
+
+
+  // this is all commented out as I am trying out using a trainschedule constructor that includes a simpler function
+
+  /*function calculateArrival() {
    // var aT = $("#arrivalTime").val().trim();
     // creates a new date object
     var currentTime= moment().format("HH:mm");
@@ -56,16 +80,20 @@ $("#submitBtn").on("click", function (event) {
    
   }
 
-  calculateArrival();
+  calculateArrival();*/
+
+
+  // commented out as I am dynamically writing the html with info pulled from the database
   // displays the data inputted by the user
+  /*
   $("#trainDisplayData").append("<tr>" +
     "<th>" + trainName + "</th>" +
     "<th>" + dest + "</th>" +
     "<th>" + frequency + "</th>" +
-    "<th>" + + "</th>" +
-    "<th>" + + "</th>"
+    "<th>" + firstArrivalPOST + "</th>" +
+    "<th>" + TrainSchedule.getMinutesRemaining + "</th>"
     + "</tr>")
-
+*/
 
 
   // Clears all of the text-boxes
@@ -76,7 +104,7 @@ $("#submitBtn").on("click", function (event) {
 });
 
 // adds user input to train database
-database.ref("Trains").on("child_added", function (childSnapshot, prevChildKey) {
+database.ref().on("child_added", function (childSnapshot, prevChildKey) {
 
   console.log(childSnapshot.val());
 
@@ -86,14 +114,21 @@ database.ref("Trains").on("child_added", function (childSnapshot, prevChildKey) 
   var firstArrival = childSnapshot.val().arrives;
   var frequency = childSnapshot.val().frequency;
 
-  // Employee Info
   console.log(trainName);
   console.log(dest);
   console.log(firstArrival);
   console.log(frequency);
 
-  /* I am still unsure how to pull the data back from firebase.
-  The user input captured gets sent into a randomly named object,
-  so im unsure how to properly reference that */
+// not fully working, it reloads all childs each time. I need it to just reload them each one time
+  database.ref().on('child_added', function(childSnapshot) {
+   // $("#trainDisplayData").empty();
+    $("#trainDisplayData").append("<tr>" +
+    "<th>" + childSnapshot.val().name + "</th>" +
+    "<th>" + childSnapshot.val().dest + "</th>" +
+    "<th>" + childSnapshot.val().frequency + "</th>" +
+    "<th>" +  + "</th>" +
+    "<th>" +  + "</th>"
+    + "</tr>")
+})
 
 });
